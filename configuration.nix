@@ -97,7 +97,7 @@
     grim
     slurp
     # Useful for confirming GL version inside the VM
-    glxinfo
+    mesa-demos
     vulkan-tools
   ];
 
