@@ -101,7 +101,7 @@
     slurp
     uwsm              # universal wayland session manager — required for uwsm-start
     # Useful for confirming GL version inside the VM
-    glxinfo
+    mesa-demos
     vulkan-tools
   ];
 
