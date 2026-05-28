@@ -63,7 +63,10 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd uwsm-start";
+        # UWSM-managed session — withUWSM = true generates the start-hyprland wrapper
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
+        # Fallback: direct launch without UWSM
+        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "greeter";
       };
     };
@@ -96,10 +99,10 @@
     wl-clipboard
     grim
     slurp
+    uwsm              # universal wayland session manager — required for uwsm-start
     # Useful for confirming GL version inside the VM
-    mesa-demos
+    glxinfo
     vulkan-tools
-    uwsm
   ];
 
   nixpkgs.config.allowUnfree = true;
