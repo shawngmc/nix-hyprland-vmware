@@ -25,7 +25,7 @@
   # ── Packages ──────────────────────────────────────────────────────────────── 
   home.packages = with pkgs; [
     # Launcher
-    rofi-wayland
+    rofi
 
     # Status bar
     waybar
