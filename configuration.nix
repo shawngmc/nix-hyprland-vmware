@@ -99,6 +99,7 @@
     # Useful for confirming GL version inside the VM
     mesa-demos
     vulkan-tools
+    uwsm
   ];
 
   nixpkgs.config.allowUnfree = true;
