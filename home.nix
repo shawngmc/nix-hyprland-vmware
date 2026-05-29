@@ -34,8 +34,8 @@
     mako
     libnotify
 
-    # Terminal — kitty works fine with OpenGL 4.3 from vmwgfx
-    kitty
+    # Terminal — foot is Wayland-native, no GL context issues
+    foot
 
     # File manager
     nautilus
@@ -56,21 +56,37 @@
     hyprpaper
     hypridle
     hyprlock
-    ghostty
   ];
 
-  # ── Kitty terminal ───────────────────────────────────────────────────────── 
-  # No GL workarounds needed — vmwgfx provides OpenGL 4.3
-  programs.kitty = {
+  # ── Foot terminal ─────────────────────────────────────────────────────────── 
+  programs.foot = {
     enable = true;
-    font.name = "JetBrainsMono Nerd Font";
-    font.size = 13;
     settings = {
-      background_opacity = "0.95";
-      confirm_os_window_close = 0;
-      linux_display_server = "wayland";
+      main = {
+        font = "JetBrainsMono Nerd Font:size=13";
+      };
+      colors = {
+        # Catppuccin Mocha
+        background = "1e1e2e";
+        foreground = "cdd6f4";
+        regular0   = "45475a";  # black
+        regular1   = "f38ba8";  # red
+        regular2   = "a6e3a1";  # green
+        regular3   = "f9e2af";  # yellow
+        regular4   = "89b4fa";  # blue
+        regular5   = "f5c2e7";  # magenta
+        regular6   = "94e2d5";  # cyan
+        regular7   = "bac2de";  # white
+        bright0    = "585b70";
+        bright1    = "f38ba8";
+        bright2    = "a6e3a1";
+        bright3    = "f9e2af";
+        bright4    = "89b4fa";
+        bright5    = "f5c2e7";
+        bright6    = "94e2d5";
+        bright7    = "a6adc8";
+      };
     };
-    theme = "Catppuccin-Mocha";
   };
 
   # ── Hyprland config (hyprland.lua) ───────────────────────────────────────── 
@@ -182,7 +198,7 @@
     -- ── Keybindings ─────────────────────────────────────────────────────────
     local SUPER = "SUPER"
 
-    hl.bind(SUPER, "Return", "exec", "ghostty")
+    hl.bind(SUPER, "Return", "exec", "foot")
     hl.bind(SUPER, "Q",      "killactive")
     hl.bind(SUPER, "M",      "exit")
     hl.bind(SUPER, "E",      "exec", "nautilus")
