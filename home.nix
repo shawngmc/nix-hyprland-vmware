@@ -37,8 +37,8 @@
     # Terminal — foot is Wayland-native, no GL context issues
     foot
 
-    # File manager
-    nautilus
+    # Browser — managed via programs.firefox, listed here for clarity
+    firefox
 
     # Fonts
     nerd-fonts.roboto-mono
@@ -222,6 +222,7 @@
     local SUPER = "SUPER"
 
     hl.bind(SUPER, "Return", "exec", "foot")
+    hl.bind(SUPER, "B",      "exec", "firefox")
     hl.bind(SUPER, "Q",      "killactive")
     hl.bind(SUPER, "M",      "exit")
     hl.bind(SUPER, "E",      "exec", "nautilus")
@@ -357,6 +358,148 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       gtk-theme = "catppuccin-mocha-mauve-standard";
+    };
+  };
+
+  # ── Firefox ──────────────────────────────────────────────────────────────── 
+  programs.firefox = {
+    enable = true;
+    profiles.default = {
+      isDefault = true;
+      settings = {
+        # Wayland native rendering
+        "widget.use-xdg-desktop-portal.mime-handler" = 1;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+        # Enable userChrome.css and userContent.css
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+        # Performance
+        "gfx.webrender.all" = true;
+        "media.ffmpeg.vaapi.enabled" = true;
+
+        # Force dark color scheme — tells websites to use dark mode too
+        "layout.css.prefers-color-scheme.content-override" = 0;
+
+        # UI
+        "browser.toolbars.bookmarks.visibility" = "never";
+        "browser.startup.page" = 3;           # restore previous session
+        "browser.shell.checkDefaultBrowser" = false;
+        "browser.tabs.inTitlebar" = 0;
+
+        # Privacy
+        "privacy.donottrackheader.enabled" = true;
+        "datareporting.healthreport.uploadEnabled" = false;
+        "app.shield.optoutstudies.enabled" = false;
+        "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+        "browser.newtabpage.activity-stream.telemetry" = false;
+      };
+
+      # ── userChrome.css — browser chrome theming ───────────────────────────
+      userChrome = ''
+        /* ── Catppuccin Mocha palette ── */
+        :root {
+          --ctp-base:    #1e1e2e;
+          --ctp-mantle:  #181825;
+          --ctp-crust:   #11111b;
+          --ctp-surface0:#313244;
+          --ctp-surface1:#45475a;
+          --ctp-surface2:#585b70;
+          --ctp-overlay0:#6c7086;
+          --ctp-text:    #cdd6f4;
+          --ctp-subtext: #a6adc8;
+          --ctp-mauve:   #cba6f7;
+          --ctp-blue:    #89b4fa;
+          --ctp-red:     #f38ba8;
+
+          /* Apply RobotoMono to all browser UI */
+          --font-body: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        /* ── Toolbar / nav bar ── */
+        #navigator-toolbox,
+        #toolbar-menubar,
+        #TabsToolbar,
+        #nav-bar,
+        #PersonalToolbar {
+          background-color: var(--ctp-mantle) !important;
+          color: var(--ctp-text) !important;
+          border-color: var(--ctp-surface0) !important;
+          font-family: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        /* ── URL bar ── */
+        #urlbar,
+        #urlbar-background {
+          background-color: var(--ctp-surface0) !important;
+          color: var(--ctp-text) !important;
+          border-color: var(--ctp-mauve) !important;
+          font-family: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        #urlbar:focus-within > #urlbar-background {
+          border-color: var(--ctp-blue) !important;
+          box-shadow: 0 0 0 1px var(--ctp-blue) !important;
+        }
+
+        /* ── Tabs ── */
+        :root { --tab-min-height: 28px !important; }
+
+        .tabbrowser-tab[selected] .tab-background {
+          background-color: var(--ctp-base) !important;
+        }
+
+        .tabbrowser-tab:not([selected]) .tab-background:hover {
+          background-color: var(--ctp-surface0) !important;
+        }
+
+        .tab-label {
+          color: var(--ctp-text) !important;
+          font-family: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        /* ── Sidebar ── */
+        #sidebar-box {
+          background-color: var(--ctp-mantle) !important;
+          color: var(--ctp-text) !important;
+        }
+
+        /* ── Context menus ── */
+        menupopup,
+        panel {
+          background-color: var(--ctp-surface0) !important;
+          color: var(--ctp-text) !important;
+          border-color: var(--ctp-surface1) !important;
+          font-family: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        menuitem:hover {
+          background-color: var(--ctp-surface1) !important;
+          color: var(--ctp-mauve) !important;
+        }
+
+        /* ── Hide tab bar when only one tab open ── */
+        #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab:only-of-type,
+        #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab:only-of-type ~ .tabbrowser-tab {
+          visibility: collapse;
+        }
+      '';
+
+      # ── userContent.css — webpage-level overrides ─────────────────────────
+      userContent = ''
+        /* Apply RobotoMono as default monospace font for web pages */
+        :root {
+          --monospace-font: "RobotoMono Nerd Font", monospace !important;
+        }
+
+        /* Firefox new tab page — dark background */
+        @-moz-document url("about:home"), url("about:newtab"), url("about:blank") {
+          body {
+            background-color: #1e1e2e !important;
+            color: #cdd6f4 !important;
+          }
+        }
+      '';
     };
   };
 
