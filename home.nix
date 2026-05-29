@@ -469,12 +469,24 @@
         "browser.shell.checkDefaultBrowser" = false;
         "browser.tabs.inTitlebar" = 0;
 
-        # Privacy
+        # Privacy & telemetry
         "privacy.donottrackheader.enabled" = true;
         "datareporting.healthreport.uploadEnabled" = false;
         "app.shield.optoutstudies.enabled" = false;
         "browser.newtabpage.activity-stream.feeds.telemetry" = false;
         "browser.newtabpage.activity-stream.telemetry" = false;
+        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
+        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
+        "browser.newtabpage.activity-stream.showSponsored" = false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+        "browser.newtabpage.activity-stream.showSponsoredCheckboxes" = false;
+        "browser.newtabpage.enabled" = false;
+        "browser.urlbar.trending.featureGate" = false;
+        "toolkit.telemetry.newProfilePing.enabled" = false;
+        "toolkit.telemetry.shutdownPingSender.enabled" = false;
+        "toolkit.telemetry.updatePing.enabled" = false;
+        "toolkit.telemetry.bhrPing.enabled" = false;
+        "toolkit.telemetry.firstShutdownPing.enabled" = false;
       };
 
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
