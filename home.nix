@@ -313,6 +313,7 @@
   # ── Mako notifications ───────────────────────────────────────────────────── 
   services.mako = {
     enable = true;
+    font = "RobotoMono Nerd Font 13";
     backgroundColor = "#1e1e2e";
     borderColor = "#cba6f7";
     textColor = "#cdd6f4";
@@ -323,6 +324,10 @@
   # ── GTK theming ──────────────────────────────────────────────────────────── 
   gtk = {
     enable = true;
+    font = {
+      name = "RobotoMono Nerd Font";
+      size = 11;
+    };
     theme = {
       name = "catppuccin-mocha-mauve-standard";
       package = pkgs.catppuccin-gtk.override {
