@@ -103,6 +103,7 @@
     # Useful for confirming GL version inside the VM
     mesa-demos
     vulkan-tools
+    ghostty
   ];
 
   nixpkgs.config.allowUnfree = true;
