@@ -56,6 +56,7 @@
     hyprpaper
     hypridle
     hyprlock
+    ghostty
   ];
 
   # ── Kitty terminal ───────────────────────────────────────────────────────── 
@@ -181,7 +182,7 @@
     -- ── Keybindings ─────────────────────────────────────────────────────────
     local SUPER = "SUPER"
 
-    hl.bind(SUPER, "Return", "exec", "kitty")
+    hl.bind(SUPER, "Return", "exec", "ghostty")
     hl.bind(SUPER, "Q",      "killactive")
     hl.bind(SUPER, "M",      "exit")
     hl.bind(SUPER, "E",      "exec", "nautilus")
