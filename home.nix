@@ -229,8 +229,9 @@
     hl.bind(SUPER, "Space",  "exec", "fuzzel")
 
     -- Screenshot
-    hl.bind("",      "Print",  "exec", "grim ~/Pictures/screenshot-$(date +%s).png")
-    hl.bind("SHIFT", "Print",  "exec", "grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +%s).png")
+    hl.bind("",             "Print", "exec", "grim ~/Pictures/screenshot-$(date +%s).png")
+    hl.bind("SHIFT",        "Print", "exec", "grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +%s).png")
+    hl.bind(SUPER.."SHIFT", "S",     "exec", "f=~/Pictures/screenshot-$(date +%s).png; grim -g \"$(slurp)\" \"$f\" && wl-copy < \"$f\"")
 
     -- Focus
     hl.bind(SUPER, "H", "movefocus", "l")
