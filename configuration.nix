@@ -59,17 +59,11 @@
   };
 
   # ── Display manager ─────────────────────────────────────────────────────────
-  services.greetd = {
+  services.displayManager.sddm = {
     enable = true;
-    settings = {
-      default_session = {
-        # UWSM-managed session — withUWSM = true generates the start-hyprland wrapper
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
-        # Fallback: direct launch without UWSM
-        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
-      };
-    };
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
+    package = pkgs.kdePackages.sddm;
   };
 
   # ── Audio ───────────────────────────────────────────────────────────────────
@@ -99,10 +93,16 @@
     wl-clipboard
     grim
     slurp
-    uwsm              # universal wayland session manager — required for uwsm-start
-    # Useful for confirming GL version inside the VM
-    mesa-demos
+    uwsm              # universal wayland session manager — required for start-hyprland
+    glxinfo
     vulkan-tools
+    # Catppuccin SDDM theme
+    (catppuccin-sddm.override {
+      flavor = "mocha";
+      accent = "mauve";
+      font = "RobotoMono Nerd Font";
+      fontSize = "13";
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;
