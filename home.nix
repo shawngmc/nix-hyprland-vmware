@@ -56,7 +56,89 @@
     hyprpaper
     hypridle
     hyprlock
-  ];
+
+    # File manager
+    nautilus
+
+    # ── CLI tools ─────────────────────────────────────────────────────────────
+    # System monitoring
+    btop          # htop alternative with graphs
+    procs         # modern ps replacement
+    iftop         # network bandwidth by connection
+    iotop         # disk I/O monitor
+    lshw          # hardware info
+    nload         # network traffic monitor
+    gping         # ping with graph
+
+    # Search / grep
+    ripgrep       # rg — fast grep
+    ripgrep-all   # rga — ripgrep over PDFs, zip, etc.
+    ugrep         # feature-rich grep alternative
+    fzf           # fuzzy finder
+
+    # Data / text processing
+    yq            # jq for YAML/JSON/TOML
+    q             # SQL on CSV files
+    fx            # interactive JSON viewer
+    bat           # cat with syntax highlighting
+    xan           # CSV toolkit
+    visidata      # TUI spreadsheet / data explorer
+    lnav          # log file navigator
+    pspg          # pager for tabular data (psql, etc.)
+    dhex          # hex editor
+
+    # Terminal multiplexers
+    zellij        # modern tmux alternative
+    tmux          # classic multiplexer
+
+    # File managers (TUI)
+    yazi          # modern TUI file manager
+    nnn           # minimal TUI file manager
+
+    # Media
+    mpv           # video player
+    yt-dlp        # video downloader
+    asciinema     # terminal session recorder
+    vhs           # terminal GIF recorder
+
+    # Shell / prompt — configured via programs.starship below
+    fastfetch     # system info / neofetch alternative
+
+    # Editors
+    neovim        # modal editor
+
+    # Kubernetes / containers
+    kubectl       # k8s CLI
+    k9s           # TUI k8s dashboard
+    dive          # explore Docker image layers
+    crane         # container registry CLI
+
+    # Development
+    uv            # fast Python package manager
+    hyperfine     # CLI benchmarking tool
+    f2            # bulk file renamer
+
+    # Network / security
+    doggo         # modern dig alternative
+    ssh-audit     # SSH server auditing
+    testssl       # TLS/SSL testing
+    w3m           # terminal web browser
+
+    # Docs / help
+    tealdeer      # tldr pages (fast Rust client)
+
+    # Email / comms
+    aerc          # TUI email client
+    discordo      # TUI Discord client
+
+    # Cloud / productivity
+    gcalcli       # Google Calendar CLI
+    wego          # terminal weather
+    bitwarden-cli # Bitwarden CLI (bw)
+
+    # Misc
+    dcv           # CSV diff viewer
+    flawz         # TUI CVE browser
 
   # ── Foot terminal ─────────────────────────────────────────────────────────── 
   programs.foot = {
@@ -504,6 +586,121 @@
           }
         }
       '';
+    };
+  };
+
+  # ── Starship prompt ──────────────────────────────────────────────────────── 
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      format = lib.concatStrings [
+        "$username"
+        "$hostname"
+        "$directory"
+        "$git_branch"
+        "$git_status"
+        "$kubernetes"
+        "$python"
+        "$nodejs"
+        "$rust"
+        "$nix_shell"
+        "$cmd_duration"
+        "$line_break"
+        "$character"
+      ];
+
+      character = {
+        success_symbol = "[❯](mauve)";
+        error_symbol   = "[❯](red)";
+        vimcmd_symbol  = "[❮](green)";
+      };
+
+      directory = {
+        style = "bold blue";
+        truncation_length = 4;
+        truncate_to_repo = true;
+      };
+
+      git_branch = {
+        symbol = " ";
+        style  = "mauve";
+      };
+
+      git_status = {
+        style    = "red";
+        ahead    = "⇡$count";
+        behind   = "⇣$count";
+        diverged = "⇕⇡$ahead_count⇣$behind_count";
+        modified = "!$count";
+        untracked = "?$count";
+        staged   = "+$count";
+        deleted  = "✘$count";
+      };
+
+      kubernetes = {
+        disabled = false;
+        symbol   = "☸ ";
+        style    = "blue";
+        contexts = [];
+      };
+
+      cmd_duration = {
+        min_time = 2000;
+        format   = "took [$duration](yellow) ";
+      };
+
+      nix_shell = {
+        symbol = " ";
+        style  = "blue";
+        format = "[$symbol$state]($style) ";
+      };
+
+      python = {
+        symbol = " ";
+        style  = "yellow";
+      };
+
+      nodejs = {
+        symbol = " ";
+        style  = "green";
+      };
+
+      rust = {
+        symbol = " ";
+        style  = "red";
+      };
+
+      # Catppuccin Mocha palette for starship
+      palette = "catppuccin_mocha";
+      palettes.catppuccin_mocha = {
+        rosewater = "#f5e0dc";
+        flamingo  = "#f2cdcd";
+        pink      = "#f5c2e7";
+        mauve     = "#cba6f7";
+        red       = "#f38ba8";
+        maroon    = "#eba0ac";
+        peach     = "#fab387";
+        yellow    = "#f9e2af";
+        green     = "#a6e3a1";
+        teal      = "#94e2d5";
+        sky       = "#89dceb";
+        sapphire  = "#74c7ec";
+        blue      = "#89b4fa";
+        lavender  = "#b4befe";
+        text      = "#cdd6f4";
+        subtext1  = "#bac2de";
+        subtext0  = "#a6adc8";
+        overlay2  = "#9399b2";
+        overlay1  = "#7f849c";
+        overlay0  = "#6c7086";
+        surface2  = "#585b70";
+        surface1  = "#45475a";
+        surface0  = "#313244";
+        base      = "#1e1e2e";
+        mantle    = "#181825";
+        crust     = "#11111b";
+      };
     };
   };
 
