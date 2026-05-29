@@ -41,7 +41,7 @@
     nautilus
 
     # Fonts
-    nerd-fonts.jetbrains-mono
+    nerd-fonts.roboto-mono
     noto-fonts
     noto-fonts-color-emoji
 
@@ -63,7 +63,7 @@
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=13";
+        font = "RobotoMono Nerd Font:size=13";
       };
       colors = {
         # Catppuccin Mocha
@@ -94,7 +94,7 @@
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=13";
+        font = "RobotoMono Nerd Font:size=13";
         terminal = "foot";
         layer = "overlay";
         width = 35;
@@ -300,7 +300,7 @@
       };
     }];
     style = ''
-      * { font-family: "JetBrainsMono Nerd Font"; font-size: 13px; }
+      * { font-family: "RobotoMono Nerd Font"; font-size: 13px; }
       window#waybar { background: rgba(30,30,46,0.92); color: #cdd6f4; }
       #workspaces button { padding: 0 6px; color: #6c7086; }
       #workspaces button.active { color: #cba6f7; border-bottom: 2px solid #cba6f7; }
