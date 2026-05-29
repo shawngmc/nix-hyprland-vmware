@@ -25,7 +25,7 @@
   # ── Packages ──────────────────────────────────────────────────────────────── 
   home.packages = with pkgs; [
     # Launcher
-    rofi
+    fuzzel
 
     # Status bar
     waybar
@@ -89,7 +89,30 @@
     };
   };
 
-  # ── Hyprland config (hyprland.lua) ───────────────────────────────────────── 
+  # ── Fuzzel launcher ──────────────────────────────────────────────────────── 
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "JetBrainsMono Nerd Font:size=13";
+        terminal = "foot";
+        layer = "overlay";
+        width = 35;
+        lines = 10;
+        border-radius = 8;
+      };
+      colors = {
+        # Catppuccin Mocha
+        background = "1e1e2eff";
+        text       = "cdd6f4ff";
+        match      = "cba6f7ff";
+        selection   = "313244ff";
+        selection-text = "cdd6f4ff";
+        selection-match = "cba6f7ff";
+        border     = "cba6f7ff";
+      };
+    };
+  };
   # As of v0.55, Hyprland uses Lua for configuration.
   # Managed via xdg.configFile until Home Manager's hyprland module is updated.
   xdg.configFile."hypr/hyprland.lua".text = ''
@@ -203,7 +226,7 @@
     hl.bind(SUPER, "M",      "exit")
     hl.bind(SUPER, "E",      "exec", "nautilus")
     hl.bind(SUPER, "F",      "fullscreen", 0)
-    hl.bind(SUPER, "Space",  "exec", "rofi -show drun")
+    hl.bind(SUPER, "Space",  "exec", "fuzzel")
 
     -- Screenshot
     hl.bind("",      "Print",  "exec", "grim ~/Pictures/screenshot-$(date +%s).png")
