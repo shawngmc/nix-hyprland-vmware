@@ -395,6 +395,10 @@
         "browser.newtabpage.activity-stream.telemetry" = false;
       };
 
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        bitwarden
+      ];
+
       # ── userChrome.css — browser chrome theming ───────────────────────────
       userChrome = ''
         /* ── Catppuccin Mocha palette ── */
