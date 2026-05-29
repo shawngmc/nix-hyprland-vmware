@@ -328,6 +328,12 @@
       name = "RobotoMono Nerd Font";
       size = 11;
     };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
     theme = {
       name = "catppuccin-mocha-mauve-standard";
       package = pkgs.catppuccin-gtk.override {
@@ -342,6 +348,15 @@
     cursorTheme = {
       name = "Adwaita";
       size = 24;
+    };
+  };
+
+  # Force dark color-scheme preference — picked up by GTK4, libadwaita, and
+  # any app that respects the FreeDesktop color-scheme portal setting
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = "catppuccin-mocha-mauve-standard";
     };
   };
 
